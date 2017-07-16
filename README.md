@@ -38,7 +38,8 @@ Each of the labs in this workshop is an independent section and you may choose t
 This section provides instructions to tear down your environment when you're done working on the labs.
 
 * * *
-
+<details>
+  <summary>Click to expand</summary>
 ### Let's Begin! Launch the CloudFormation Stack
 *Prior to launching a stack, be aware that a few of the resources launched need to be manually deleted when the workshop is over. When finished working, please review the "Workshop Cleanup" section to learn what manual teardown is required by you.*
 
@@ -73,6 +74,7 @@ Region | Launch Template
 7\. Click the "Outputs" tab in CloudFormation and click the link for "MyChatRoomURL". This should open your chat application in a new tab. Leave this tab open as you'll come back to it later.
 
 Please continue to the next section for the required Cognito User Pools authentication setup.
+
 
 ## Setup Authentication with Cognito User Pools (Required)
 
@@ -169,6 +171,8 @@ You should have copied these from your User Pool earlier when you set it up. If 
 Scroll to the bottom of the page and click **Save Changes** to save the User Pool configuration settings. Your Cognito Federated Identiy Pool has been configured with Congito User Pool as an IdP. When users authenticate to the User Pool, they will assume temporary credentials with the permissions allowed via the Authenticated Role.
 
 16\. You will now make an update to an application config file so that the serverless Javascript application can communicate with your User Pool to log users in.
+</details>
+
 
 Navigate to the Amazon S3 console **in the region where you launched your CloudFormation stack.**
 
