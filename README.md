@@ -179,7 +179,7 @@ Scroll to the bottom of the page and click **Save Changes** to save the User Poo
 
 * * *
 
-### Setup Chat App and User Registration
+## Setup Chat App and User Registration
 
 Navigate to the Amazon S3 console **in the region where you launched your CloudFormation stack.**
 
