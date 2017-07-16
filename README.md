@@ -38,8 +38,11 @@ Each of the labs in this workshop is an independent section and you may choose t
 This section provides instructions to tear down your environment when you're done working on the labs.
 
 * * *
+### Setup Authentication with Cognito User Pools
 <details>
-  <summary>This section has already been completed for you. If you are interested in the steps involved with User Identity Management click to expand</summary>
+  <summary>
+  This section has already been completed for you. If you are interested in the steps involved with Cognito User Pools click to expand
+  </summary>
 
 ### Let's Begin! Launch the CloudFormation Stack
 *Prior to launching a stack, be aware that a few of the resources launched need to be manually deleted when the workshop is over. When finished working, please review the "Workshop Cleanup" section to learn what manual teardown is required by you.*
@@ -175,6 +178,8 @@ Scroll to the bottom of the page and click **Save Changes** to save the User Poo
 </details>
 
 * * *
+
+### Setup Chat App and User Registration
 
 Navigate to the Amazon S3 console **in the region where you launched your CloudFormation stack.**
 
