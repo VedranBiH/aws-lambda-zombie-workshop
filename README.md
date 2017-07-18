@@ -177,43 +177,55 @@ Scroll to the bottom of the page and click **Save Changes** to save the User Poo
 16\. You will now make an update to an application config file so that the serverless Javascript application can communicate with your User Pool to log users in.
 </details>
 
-* * *
-
 ## Setup Chat App and User Registration
 
-Navigate to the Amazon S3 console **in the region where you launched your CloudFormation stack.**
+1\. Verify you are in the correct region as specified on the team information provided by the facilitator.
 
-* If you changed regions to configure Cognito, please return back to the region where you launched the stack and navigate to the S3 service.
+2\. Type CloudFormation in the AWS services search text box and select it, or select CloudFormation from the list of services provided in the Services drop down in the upper left corner of the main console.
+
+3\. Locate your stack by Team name by locating it in the list our filtering the list with the text box. Select the stack for your team.
+
+4\. Click the "Outputs" tab in CloudFormation find the following values and copy and paste them to a text editor for reference.
+
+* MyStackRegion - The region where the stack was created.
+
+* UserPoolId - User Pool ID to be used for USER_POOL_ID variable.
+
+* ClientId - Client ID to be used for CLIENT_ID variable.
+
+* MyChatRoomURL - Click the link for "MyChatRoomURL". This should open your chat application in a new tab. Leave this tab open as you'll come back to it later.
+
+5\. Navigate to the Amazon S3 console
 
 ![Navigate to the S3 service](/Images/Cognito-Step16.png)
 
-17\. On the Amazon S3 buckets listing page, find and click into the bucket that was created for you by CloudFormation. It should be named with your stack name prepended to the beginning. Something like [CloudFormation Stack Name]-s3bucketforwebsitecontent"....
+6\. On the Amazon S3 buckets listing page, find and click into the bucket that was created for your Team by CloudFormation. It should be named with your Team stack name prepended to the beginning. Something like [Team Stack Name]-s3bucketforwebsitecontent"....
 
 * In the S3 Console search bar you can type **s3bucketforwebsitecontent** and your S3 bucket will display.
 
-18\. This bucket contains all the contents for hosting your serverless JS app as well as the source code for the workshop's Lambda functions and CloudFormation resources. Please do not delete these contents. Click into the folder (prefix) named **S3** and navigate through to the file **S3/assets/js/constants.js**
+7\. This bucket contains all the contents for hosting your serverless JS app as well as the source code for the workshop's Lambda functions and CloudFormation resources. Please do not delete these contents. Click into the folder (prefix) named **S3** and navigate through to the file **S3/assets/js/constants.js**
 
 Download the **S3/assets/js.constants.js** file to your local machine and open it with a text editor.
 
 ![Download the constants.js file](/Images/Cognito-Step18.png)
 
-19\. Open up the constants.js file and copy over the User Pool ID into the "USER_POOL_ID" variable. Then copy the App Client ID into the "CLIENT_ID" variable. These should be copied from the open text file you had open from earlier.
+8\. Open up the constants.js file and copy over the User Pool ID into the "USER_POOL_ID" variable. Then copy the App Client ID into the "CLIENT_ID" variable. These should be copied from the open text file you had open from earlier.
 
 * Your serverless javascript zombie application requires this constants values in file communicate with the different services of the workshop.
 
 * The Identity Pool Id was automatically filled in with several other variables when the CloudFormation template was launched.
 
-20\. Save the constants.js file and upload it back to S3. While in the S3 console window, make sure you are in the **js** directory. Click the blue **Upload** button and upload the constants.js file from your local machine. Within the upload dialog, select the "Manage public permissions" dropdown and set the permissions on the file to read-only for the public by selecting the **Read** checkbox next to Everyone under the Objects category. You can also drag your file from your local machine into the S3 browser console to initiate an upload and then when the object is uploaded, make sure to select **Make Public**.
+9\. Save the constants.js file and upload it back to S3. While in the S3 console window, make sure you are in the **js** directory. Click the blue **Upload** button and upload the constants.js file from your local machine. Within the upload dialog, select the "Manage public permissions" dropdown and set the permissions on the file to read-only for the public by selecting the **Read** checkbox next to Everyone under the Objects category. You can also drag your file from your local machine into the S3 browser console to initiate an upload and then when the object is uploaded, make sure to select **Make Public**.
 
 * Your application now has the configuration it needs to interact with Cognito.
 
-21\. Navigate back to CloudFormation and find the Chat Room URL (MyChatRoomURL) in the Outputs tab of your CloudFormation stack. Click it to open the chat application in a new browser window.
+10\. Navigate back to CloudFormation and find the Chat Room URL (MyChatRoomURL) in the Outputs tab of your CloudFormation stack. Click it to open the chat application in a new browser window.
 
 * If you already had the application opened in your browser, please refresh the page so that the new constants.js loads with the app.
 
-22\. You should see a sign in page for the Zombie survivor web app. You need to create an account so click **Sign Up**.
+11\. You should see a sign in page for the Zombie survivor web app. You need to create an account so click **Sign Up**.
 
-23\. Fill out the form to sign up as a survivor.
+12\. Fill out the form to sign up as a survivor.
 
 * **Select your Camp**: Specify the geography where you live! Currently this attribute is not used in the application and is available for those that want to tackle an extra credit opportunity!. When you're done with the workshop, try and tackle the Channel Challenge in the Appendix.
 
@@ -223,24 +235,23 @@ Download the **S3/assets/js.constants.js** file to your local machine and open i
 
 When done, click **Sign Up**.
 
-24\. A form should appear asking you to type in your confirmation code. Please check your inbox for the email address you signed up with. You should received an email with the subject "Signal Corps Survivor Confirmation" (May be in your Spam folder!). Copy over the verification code and enter into the confirmation window.
+13\. A form should appear asking you to type in your confirmation code. Please check your inbox for the email address you signed up with. You should received an email with the subject "Signal Corps Survivor Confirmation" (May be in your Spam folder!). Copy over the verification code and enter into the confirmation window.
 
 **Troubleshooting tips:**
 
-* If you are getting errors during the signup, please revisit the settings for your Cognito User Pool. You need to make sure that you've done the following -  
+* If you are getting errors during the signup, please revisit the settings for your Cognito User Pool. You need to make sure that you've done the following -
 
-    * Configured your Cognito Lambda triggers for both the **Pre-Authentication** and **Post-Confirmation** steps as described in Step 10.
+  * Configured your Cognito Lambda triggers for both the **Pre-Authentication** and **Post-Confirmation** steps as described in Step 10.
 
-    * Properly modified the constants.js config file and re-uploaded it to the JS directory for your application in S3. After you uploaded this constants.js file, you should have refreshed your zombie chat browser application page so that it could pull down the latest JS files. The application is client-side and needs this file's properties in order to bootstrap itself.
+  * Properly modified the constants.js config file and re-uploaded it to the JS directory for your application in S3. After you uploaded this constants.js file, you should have refreshed your zombie chat browser application page so that it could pull down the latest JS files. The application is client-side and needs this file's properties in order to bootstrap itself.
 
 * Users created in the application are also stored in a DynamoDB table named "Users". If you did not have your Cognito triggers set up correctly, you will need to navigate to the DynamoDB Users table and delete the entry for your user. You can then re-register in the application again.
-
 
 ![Confirm your signup](/Images/Cognito-Step24.png)
 
 After confirming your account, sign in with your credentials and begin chatting! You should see a red button called **Start Chatting** - click that button to toggle your session on. You may then begin typing messages followed by the "Enter" key to submit them.
 
-25\. Your messages should begin showing up in the central chat pane window. Feel free to share the URL with your teammates, have them signup for accounts and begin chatting as a group! If you are building this solution solo, you can create multiple user accounts with different email addresses. Then login to both user accounts in different browsers to simulate multiple users.
+14\. Your messages should begin showing up in the central chat pane window. Feel free to share the URL with your teammates, have them signup for accounts and begin chatting as a group! If you are building this solution solo, you can create multiple user accounts with different email addresses. Then login to both user accounts in different browsers to simulate multiple users.
 
 **The baseline chat application is now configured and working! There is still important functionality missing and the Lambda Signal Corps needs you to build it out...so get started below!**
 
