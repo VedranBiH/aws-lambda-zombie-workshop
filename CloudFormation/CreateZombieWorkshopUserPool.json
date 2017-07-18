@@ -1240,9 +1240,163 @@
         "PutWebsiteFilesInS3",
         "S3GetFilesFunction"
       ]
+    },
+    "UserPool": {
+      "Type": "AWS::Cognito::UserPool",
+      "Properties": {
+        "AdminCreateUserConfig": {
+          "AllowAdminCreateUserOnly": false,
+          "InviteMessageTemplate": {
+            "EmailMessage": "Your username is {username} and temporary password is {####}.",
+            "EmailSubject": "Your temporary password"
+          }
+        },
+        "AliasAttributes": [
+          "email",
+          "preferred_username",
+          "phone_number"
+        ],
+        "AutoVerifiedAttributes": [
+          "email"
+        ],
+        "EmailVerificationMessage": {
+          "Fn::Join": [
+            "",
+            [
+              "This is your verification code for stack",
+              {
+                "Ref": "AWS::StackName"
+              },
+              " for the CSX and AWS Hackathon. Your verification code is {####}."
+            ]
+          ]
+        },
+        "EmailVerificationSubject": "CSX AWS Hackathon Verification",
+        "LambdaConfig": {
+          "PostConfirmation": {
+            "Fn::GetAtt": [
+              "CognitoTriggerBuild",
+              "Arn"
+            ]
+          },
+          "PreAuthentication": {
+            "Fn::GetAtt": [
+              "CognitoTriggerBuild",
+              "Arn"
+            ]
+          }
+        },
+        "UserPoolName": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "AWS::StackName"
+              },
+              "-UserPool"
+            ]
+          ]
+        },
+        "Schema": [
+          {
+            "AttributeDataType": "String",
+            "DeveloperOnlyAttribute": false,
+            "Mutable": true,
+            "Name": "email",
+            "StringAttributeConstraints": {
+              "MaxLength": "256",
+              "MinLength": "1"
+            },
+            "Required": true
+          },
+          {
+            "AttributeDataType": "String",
+            "DeveloperOnlyAttribute": false,
+            "Mutable": true,
+            "Name": "name",
+            "StringAttributeConstraints": {
+              "MaxLength": "256",
+              "MinLength": "1"
+            },
+            "Required": true
+          },
+          {
+            "AttributeDataType": "String",
+            "DeveloperOnlyAttribute": false,
+            "Mutable": true,
+            "Name": "phone_number",
+            "StringAttributeConstraints": {
+              "MaxLength": "256",
+              "MinLength": "1"
+            },
+            "Required": true
+          },
+          {
+            "AttributeDataType": "String",
+            "DeveloperOnlyAttribute": false,
+            "Mutable": true,
+            "Name": "camp",
+            "StringAttributeConstraints": {
+              "MaxLength": "256",
+              "MinLength": "1"
+            },
+            "Required": false
+          },
+          {
+            "AttributeDataType": "String",
+            "DeveloperOnlyAttribute": false,
+            "Mutable": true,
+            "Name": "slackteamdomain",
+            "StringAttributeConstraints": {
+              "MaxLength": "256",
+              "MinLength": "1"
+            },
+            "Required": false
+          },
+          {
+            "AttributeDataType": "String",
+            "DeveloperOnlyAttribute": false,
+            "Mutable": true,
+            "Name": "slackuser",
+            "StringAttributeConstraints": {
+              "MaxLength": "256",
+              "MinLength": "1"
+            },
+            "Required": false
+          }
+        ]
+      },
+      "DependsOn": [
+        "CognitoTriggerBuild",
+        "CreateCognitoTrigger"
+      ]
+    },
+    "UserPoolClient": {
+      "Type": "AWS::Cognito::UserPoolClient",
+      "Properties": {
+        "ClientName": "Zombie Survivor Chat App",
+        "UserPoolId": {
+          "Ref": "UserPool"
+        }
+      },
+      "DependsOn": [
+        "UserPool"
+      ]
     }
   },
   "Outputs": {
+    "UserPoolId": {
+      "Value": {
+        "Ref": "UserPool"
+      },
+      "Description": "User Pool ID to be used for USER_POOL_ID variable."
+    },
+    "ClientId": {
+      "Value": {
+        "Ref": "UserPoolClient"
+      },
+      "Description": "Client ID to be used for CLIENT_ID variable."
+    },
     "MyStackRegion": {
       "Value": {
         "Ref": "AWS::Region"
