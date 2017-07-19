@@ -14,8 +14,8 @@ exports.handler = function(event, context, callback) {
   var cognitoidentity = new AWS.CognitoIdentity({region: event.ResourceProperties.CognitoRegion});
   var s3bucket = new AWS.S3();
   var cognitoRoleARN = event.ResourceProperties.cognitoRoleARN;
-  var clientId = '';
-  var userPoolId = '';
+  var clientId = event.ResourceProperties.clientId;
+  var userPoolId = event.ResourceProperties.userPoolId;
   var identityPoolid = '';
 
   // If DELETE request type is sent, return success to cloudformation. User will manually tear down Cognito resources

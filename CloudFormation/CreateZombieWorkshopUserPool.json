@@ -688,9 +688,7 @@
           ]
         },
         "Code": {
-          "S3Bucket": {
-            "Ref": "S3BucketForWebsiteContent"
-          },
+          "S3Bucket": "csx-zombie-workshop",
           "S3Key": "cognitoTriggerBuild.zip"
         },
         "Runtime": "nodejs4.3",
@@ -870,9 +868,7 @@
           ]
         },
         "Code": {
-          "S3Bucket": {
-            "Ref": "S3BucketForWebsiteContent"
-          },
+          "S3Bucket": "csx-zombie-workshop",
           "S3Key": "cognito.zip"
         },
         "Runtime": "nodejs4.3",
@@ -883,7 +879,9 @@
         "ZombieLabLambdaRole",
         "S3BucketForWebsiteContent",
         "PutWebsiteFilesInS3",
-        "CreateAPIGateway"
+        "CreateAPIGateway",
+        "UserPool",
+        "UserPoolClient"
       ]
     },
     "CreateCognitoPools": {
@@ -919,6 +917,12 @@
         "constantsFile": "S3/assets/js/constants.js",
         "StackName": {
           "Ref": "AWS::StackName"
+        },
+        "clientId":{
+          "Ref": "UserPoolClient"
+        },
+        "userPoolId":{
+          "Ref": "UserPool"
         }
       },
       "DependsOn": [
@@ -927,7 +931,9 @@
         "PutWebsiteFilesInS3",
         "WriteMessagesToDynamoDB",
         "GetMessagesFromDynamoDB",
-        "MessagesDynamoDBTable"
+        "MessagesDynamoDBTable",
+        "UserPool",
+        "UserPoolClient"
       ]
     },
     "WriteMessagesToDynamoDB": {
@@ -1271,13 +1277,13 @@
           "PostConfirmation": {
             "Fn::GetAtt": [
               "CreateCognitoTrigger",
-              "Data"
+              "FunctionARN"
             ]
           },
           "PreAuthentication": {
             "Fn::GetAtt": [
               "CreateCognitoTrigger",
-              "Data"
+              "FunctionARN"
             ]
           }
         },
@@ -1364,8 +1370,6 @@
       "DependsOn": [
         "CognitoTriggerBuild",
         "CreateCognitoTrigger",
-        "CognitoPoolsFunction",
-        "CreateCognitoPools",
         "ZombieLabLambdaRole"
       ]
     },
@@ -1375,14 +1379,14 @@
         "ClientName": "Zombie Survivor Chat App",
         "UserPoolId": {
           "Ref": "UserPool"
-        }
+        },
+        "ReadAttributes" : [ "email", "email_verified"],
+        "WriteAttributes" : [ "email", "email_verified" ]
       },
       "DependsOn": [
         "UserPool",
         "CognitoTriggerBuild",
         "CreateCognitoTrigger",
-        "CognitoPoolsFunction",
-        "CreateCognitoPools",
         "ZombieLabLambdaRole"
       ]
     }
