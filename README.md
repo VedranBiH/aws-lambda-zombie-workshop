@@ -205,7 +205,7 @@ Scroll to the bottom of the page and click **Save Changes** to save the User Poo
 
 7\. This bucket contains all the contents for hosting your serverless JS app as well as the source code for the workshop's Lambda functions and CloudFormation resources. Please do not delete these contents. Click into the folder (prefix) named **S3** and navigate through to the file **S3/assets/js/constants.js**
 
-Download the **S3/assets/js.constants.js** file to your local machine and open it with a text editor.
+Download the **S3/assets/js/constants.js** file to your local machine and open it with a text editor.
 
 ![Download the constants.js file](/Images/Cognito-Step18.png)
 

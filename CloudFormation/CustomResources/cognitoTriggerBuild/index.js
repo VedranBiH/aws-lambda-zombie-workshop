@@ -45,7 +45,7 @@ exports.handler = function(event, context, callback) {
       }
       else {
         console.log('Created cognitoLambdaTrigger. Function ARN is: ' + data.FunctionArn);
-        responseData = {FunctionARN: data.functionArn};
+        responseData = {"FunctionARN": data.functionArn};
         responseStatus = "SUCCESS";
         console.log('responseStatus is: ' + responseStatus + ' and event is: ' + event + ' and context is: ' + context);
         sendResponse(event, context, responseStatus, responseData, callback);
