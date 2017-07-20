@@ -868,7 +868,9 @@
           ]
         },
         "Code": {
-          "S3Bucket": "csx-zombie-workshop",
+          "S3Bucket": {
+            "Ref": "S3BucketForWebsiteContent"
+          },
           "S3Key": "cognito.zip"
         },
         "Runtime": "nodejs4.3",
@@ -879,9 +881,7 @@
         "ZombieLabLambdaRole",
         "S3BucketForWebsiteContent",
         "PutWebsiteFilesInS3",
-        "CreateAPIGateway",
-        "UserPool",
-        "UserPoolClient"
+        "CreateAPIGateway"
       ]
     },
     "CreateCognitoPools": {
@@ -917,12 +917,6 @@
         "constantsFile": "S3/assets/js/constants.js",
         "StackName": {
           "Ref": "AWS::StackName"
-        },
-        "clientId":{
-          "Ref": "UserPoolClient"
-        },
-        "userPoolId":{
-          "Ref": "UserPool"
         }
       },
       "DependsOn": [
@@ -931,9 +925,7 @@
         "PutWebsiteFilesInS3",
         "WriteMessagesToDynamoDB",
         "GetMessagesFromDynamoDB",
-        "MessagesDynamoDBTable",
-        "UserPool",
-        "UserPoolClient"
+        "MessagesDynamoDBTable"
       ]
     },
     "WriteMessagesToDynamoDB": {
@@ -1273,20 +1265,6 @@
           ]
         },
         "EmailVerificationSubject": "CSX AWS Hackathon Verification",
-        "LambdaConfig": {
-          "PostConfirmation": {
-            "Fn::GetAtt": [
-              "CreateCognitoTrigger",
-              "FunctionARN"
-            ]
-          },
-          "PreAuthentication": {
-            "Fn::GetAtt": [
-              "CreateCognitoTrigger",
-              "FunctionARN"
-            ]
-          }
-        },
         "UserPoolName": {
           "Fn::Join": [
             "",
@@ -1370,6 +1348,8 @@
       "DependsOn": [
         "CognitoTriggerBuild",
         "CreateCognitoTrigger",
+        "CognitoPoolsFunction",
+        "CreateCognitoPools",
         "ZombieLabLambdaRole"
       ]
     },
@@ -1380,13 +1360,59 @@
         "UserPoolId": {
           "Ref": "UserPool"
         },
-        "ReadAttributes" : [ "email", "email_verified"],
-        "WriteAttributes" : [ "email", "email_verified" ]
+        "ReadAttributes": [
+          "address",
+          "birthdate",
+          "custom:camp",
+          "custom:slackteamdomain",
+          "custom:slackuser",
+          "email",
+          "email_verified",
+          "family_name",
+          "gender",
+          "given_name",
+          "locale",
+          "middle_name",
+          "name",
+          "nickname",
+          "phone_number",
+          "phone_number_verified",
+          "picture",
+          "preferred_username",
+          "profile",
+          "updated_at",
+          "website",
+          "zoneinfo"
+        ],
+        "WriteAttributes": [
+          "address",
+          "birthdate",
+          "custom:camp",
+          "custom:slackteamdomain",
+          "custom:slackuser",
+          "email",
+          "family_name",
+          "gender",
+          "given_name",
+          "locale",
+          "middle_name",
+          "name",
+          "nickname",
+          "phone_number",
+          "picture",
+          "preferred_username",
+          "profile",
+          "updated_at",
+          "website",
+          "zoneinfo"
+        ]
       },
       "DependsOn": [
         "UserPool",
         "CognitoTriggerBuild",
         "CreateCognitoTrigger",
+        "CognitoPoolsFunction",
+        "CreateCognitoPools",
         "ZombieLabLambdaRole"
       ]
     }
