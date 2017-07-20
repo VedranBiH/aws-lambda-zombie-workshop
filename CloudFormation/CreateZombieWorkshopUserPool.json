@@ -1265,6 +1265,20 @@
           ]
         },
         "EmailVerificationSubject": "CSX AWS Hackathon Verification",
+        "LambdaConfig": {
+          "PostConfirmation": {
+            "Fn::GetAtt": [
+              "CreateCognitoTrigger",
+              "FunctionARN"
+            ]
+          },
+          "PreAuthentication": {
+            "Fn::GetAtt": [
+              "CreateCognitoTrigger",
+              "FunctionARN"
+            ]
+          }
+        },
         "UserPoolName": {
           "Fn::Join": [
             "",
@@ -1348,8 +1362,6 @@
       "DependsOn": [
         "CognitoTriggerBuild",
         "CreateCognitoTrigger",
-        "CognitoPoolsFunction",
-        "CreateCognitoPools",
         "ZombieLabLambdaRole"
       ]
     },
@@ -1411,8 +1423,72 @@
         "UserPool",
         "CognitoTriggerBuild",
         "CreateCognitoTrigger",
-        "CognitoPoolsFunction",
-        "CreateCognitoPools",
+        "ZombieLabLambdaRole"
+      ]
+    },
+    "CognitoLambdaTriggerPostConfirmation": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "AWS::StackName"
+              },
+              "-CognitoLambdaTrigger-",
+              {
+                "Ref": "AWS::Region"
+              }
+            ]
+          ]
+        },
+        "Principal": "cognito-idp.amazonaws.com",
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "UserPool",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "UserPool",
+        "CognitoTriggerBuild",
+        "CreateCognitoTrigger",
+        "ZombieLabLambdaRole"
+      ]
+    },
+    "CognitoLambdaTriggerPreAuthentication": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::Join": [
+            "",
+            [
+              {
+                "Ref": "AWS::StackName"
+              },
+              "-CognitoLambdaTrigger-",
+              {
+                "Ref": "AWS::Region"
+              }
+            ]
+          ]
+        },
+        "Principal": "cognito-idp.amazonaws.com",
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "UserPool",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "UserPool",
+        "CognitoTriggerBuild",
+        "CreateCognitoTrigger",
         "ZombieLabLambdaRole"
       ]
     }
