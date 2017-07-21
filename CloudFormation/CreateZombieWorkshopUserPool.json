@@ -688,7 +688,17 @@
           ]
         },
         "Code": {
-          "S3Bucket": "csx-zombie-workshop",
+          "S3Bucket": {
+          "Fn::Join": [
+            "",
+            [
+              "csx-zombie-workshop-",
+              {
+                "Ref": "AWS::Region"
+              }
+            ]
+          ]
+        },
           "S3Key": "cognitoTriggerBuild.zip"
         },
         "Runtime": "nodejs4.3",
