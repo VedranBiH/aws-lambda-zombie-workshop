@@ -7,8 +7,8 @@ This workshop has a baseline survivor chat app that is launched via [CloudFormat
 
 Prior to beginning the labs, you will need to finalize the setup of User authentication for the application with [Cognito User Pools](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html). This is a necessary step to finalize the readiness of the application.
 
-### Required: Setup Authentication with Cognito User Pools
-In this setup lab, you will integrate user authentication into your serverless survivor chat application using Amazon Cognito User Pools.
+### Required: Setup Chat App and User Registration
+In this setup lab, you will integrate user authentication into your serverless survivor chat application using Amazon Cognito User Pools. This section should be done by one person in the team to enable the rest of the Lab capabilities. After this section each of the Labs can be done concurrently.
 
 ### Labs
 Each of the labs in this workshop is an independent section and you may choose to do some or all of them, or in any order that you prefer.
@@ -156,6 +156,8 @@ You are done configuring the User Pool. You will now setup federation into the C
 </details>
 
 ## Setup Chat App and User Registration
+
+* This section should be done by one person in the team to enable the rest of the Lab capabilities. After this section each of the Labs can be done concurrently.
 
 1\. Verify you are in the correct region as specified on the team information provided by the facilitator.
 
