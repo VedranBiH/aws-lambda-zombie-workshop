@@ -8,7 +8,7 @@ This workshop has a baseline survivor chat app that is launched via [CloudFormat
 Prior to beginning the labs, you will need to finalize the setup of User authentication for the application with [Cognito User Pools](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html). This is a necessary step to finalize the readiness of the application.
 
 ### Required: Setup Chat App and User Registration
-In this setup lab, you will integrate user authentication into your serverless survivor chat application using Amazon Cognito User Pools. This section should be done by one person in the team to enable the rest of the Lab capabilities. After this section each of the Labs can be done concurrently.
+In this setup lab, you will integrate user authentication into your serverless survivor chat application using Amazon Cognito User Pools.
 
 ### Labs
 Each of the labs in this workshop is an independent section and you may choose to do some or all of them, or in any order that you prefer.
@@ -157,7 +157,7 @@ You are done configuring the User Pool. You will now setup federation into the C
 
 ## Setup Chat App and User Registration
 
-* This section should be done by one person in the team to enable the rest of the Lab capabilities. After this section each of the Labs can be done concurrently.
+* Steps 1 - 14 in this section should be done by one person in the team to enable the rest of the Lab capabilities. Steps 15 - 19 should be done by all team members to register with the chat application. After this section each of the Labs can be done concurrently.
 
 1\. Verify you are in the correct region as specified on the team information provided by the facilitator.
 
@@ -209,7 +209,7 @@ Download the **S3/assets/js/constants.js** file to your local machine and open i
 
 13\. Open up the constants.js file and copy over the User Pool ID into the "USER_POOL_ID" variable. Then copy the App Client ID into the "CLIENT_ID" variable. These should be copied from the open text file you had open from earlier.
 
-* Your serverless javascript zombie application requires this constants values in file communicate with the different services of the workshop.
+* Your serverless javascript zombie application requires these constants values in the file to communicate with the different services of the workshop.
 
 * The Identity Pool Id was automatically filled in with several other variables when the CloudFormation template was launched.
 
@@ -217,7 +217,7 @@ Download the **S3/assets/js/constants.js** file to your local machine and open i
 
 * Your application now has the configuration it needs to interact with Cognito.
 
-15\. Navigate back to CloudFormation and find the Chat Room URL (MyChatRoomURL) in the Outputs tab of your CloudFormation stack. Click it to open the chat application in a new browser window.
+15\. Navigate back to CloudFormation and find the Chat Room URL (MyChatRoomURL) in the Outputs tab of your CloudFormation stack or copy the URL from the text editor you may have copied it to. Click it to open the chat application in a new browser window.
 
 * If you already had the application opened in your browser, please refresh the page so that the new constants.js loads with the app.
 
