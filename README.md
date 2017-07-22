@@ -229,7 +229,7 @@ Download the **S3/assets/js/constants.js** file to your local machine and open i
 
 * **Slack Username**: Type the Slack Username you will use during the Slack lab of this workshop. This associates your Slack username with your Survivor app user account and is required if you want to do the Slack lab.
 
-* **Slack Team Domain Name**: Slack users can be members of many teams. Type the Slack team domain name that you want to integrate with this survivor chat app. The combination of a Slack team domain and Slack Username will unique identity a user to associate with your new Survivor chat app account.
+* **Slack Team Domain Name**: Slack users can be members of many teams. If you plan on completeing Lab 4 you will want to use an existing SLack team or create a new one at https://slack.com/. Type the Slack team domain name (example: csx-tech) that you want to integrate with this survivor chat app. The combination of a Slack team domain and Slack Username will unique identity a user to associate with your new Survivor chat app account. Make sure to enter only the team domain name identifier and not the entire slack domain. Example: For a url https://csx-tech.slack.com the entry for Slack Team Domain would be **csx-tech**
 
 When done, click **Sign Up**.
 
