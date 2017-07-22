@@ -645,12 +645,14 @@ If you wish to utilize the Zombie Sensor as a part of the workshop, this guide w
 * How to create the AWS backend (Simple Notification Service Topic) for the Zombie Sensor  
 * How to install the Node.js device code provided in this workshop onto the device
 
-**Please note that this section requires an IoT device that can emit messages to SNS. If you are setting this up on your own device outside of the workshop, please proceed through the sections below to do that, otherwise skip the device setup instructions as the device has been setup by AWS for you by the workshop instructor.**
-
+* * *
+**IoT Device setup and SNS configuration**
 <details>
   <summary>
   This section has already been completed for you. If you are interested in the steps involved with setting up the IoT device and the SNS topic click to expand
   </summary>
+**Please note that this section requires an IoT device that can emit messages to SNS. If you are setting this up on your own device outside of the workshop, please proceed through the sections below to do that, otherwise skip the device setup instructions as the device has been setup by AWS for you by the workshop instructor.**
+
 **Items Required**
 
 1\. One Intel® Edison and Grove IoT Starter Kit Powered by AWS. This can be purchased [here](http://www.amazon.com/gp/product/B0168KU5FK?*Version*=1&*entries*=0).  
@@ -733,6 +735,8 @@ Intel Edison -> SNS topic -> Your AWS Lambda functions subscribed to the topic.
 15\. Your app should now be running on the Edison device and your messages being published to the SNS topic. You can consume these messages using AWS Lambda. There is some documentation to get you started [here](http://docs.aws.amazon.com/sns/latest/dg/sns-lambda.html). Continue below to learn how to integrate the SNS notifications into the chat application.
 
 </details>
+
+* * *
 
 ####Consuming the SNS Topic Messages with AWS Lambda
 
