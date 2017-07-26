@@ -29,9 +29,9 @@ Each of the labs in this workshop is an independent section and you may choose t
 
     This exercise integrates the popular messaging app, [Slack](http://slack.com), into the chat application so that survivors can send messages to the survivor chat from within the Slack app.
 
-* **Lab 5: Intel Edison Zombie Motion Sensor** (IoT device required)
+* **Lab 5: Raspberry Pi Zombie Motion Sensor** (IoT device required)
 
-    This exercise integrates motion sensor detection of zombies to the chat system using an Intel Edison board and a Grove PIR Motion Sensor. You will configure a Lambda function to consume motion detection events and push them into the survivor chat!
+    This exercise integrates motion sensor detection of zombies to the chat system using an Raspberry Pi board and a Grove PIR Motion Sensor. You will configure a Lambda function to consume motion detection events and push them into the survivor chat!
 
 ### Workshop Cleanup
 
@@ -740,7 +740,7 @@ Intel Edison -> SNS topic -> Your AWS Lambda functions subscribed to the topic.
 
 ####Consuming the SNS Topic Messages with AWS Lambda
 
-Using the things learned in this workshop, can you develop a Lambda function that alerts survivors in the chat application when zombies are detected from the zombie sensor? In this section you will configure a Lambda function that triggers when messages are sent from the Edison device to the zombie sensor SNS topic. This function will push the messages to the chat application to notify survivors of zombies!
+Using the things learned in this workshop, can you develop a Lambda function that alerts survivors in the chat application when zombies are detected from the zombie sensor? In this section you will configure a Lambda function that triggers when messages are sent from the Raspberry Pi device to the zombie sensor SNS topic. This function will push the messages to the chat application to notify survivors of zombies!
 
 1\. Open up the Lambda console and click **Create a Lambda function**.
 
@@ -750,7 +750,7 @@ Using the things learned in this workshop, can you develop a Lambda function tha
 
 ![Setup SNS as an Event Trigger for Lambda](/Images/Sensor-Step3.png)
 
-* For the SNS topic selection, either select the SNS topic from the dropdown you created earlier (if you're working on this outside of an AWS workshop) or if you are working in an AWS workshop, insert the shared SNS topic ARN provided to you by the organizer. Make sure the trigger checkbox option is set to enabled so that your Lambda function will immediately begin processing messages. Click **Next**.
+* For the SNS topic selection, select **zombieSensor-1**. Make sure the trigger checkbox option is set to enabled so that your Lambda function will immediately begin processing messages. Click **Next**.
 
 * The SNS Topic ARN provided by AWS (if in a workshop) is not in your AWS account and will not display in your dropdown of choices. It is an ARN provided by AWS in a separate account and needs to be typed in.
 
@@ -766,7 +766,7 @@ When you've copied the code into the Lambda browser editor, locate the variable 
 
 8\. That's it! When your function is created, head on over to your survivor chat application. If your session has expired you may need to login again.
 
-* Almost immediately you should begin seeing zombie sensor messages showing up in the chat application which means your messages are successfully sending from the Intel Edison device to the Zombie Sensor SNS Topic. Any survivors with Lambda functions subscribed to this topic will get notifications in their team's survivor chat service.  
+* Almost immediately you should begin seeing zombie sensor messages showing up in the chat application which means your messages are successfully sending from the Raspberry Pi device to the Zombie Sensor SNS Topic. Any survivors with Lambda functions subscribed to this topic will get notifications in their team's survivor chat service.  
 
 * This Lambda Function takes the zombie sensor message from SNS, parses it, and makes an AWS SigV4 signed HTTPS POST request to your API Gateway message endpoint. That endpoint inserts the record into DynamoDB as a message making it available to the application on subsequent poll requests.
 
