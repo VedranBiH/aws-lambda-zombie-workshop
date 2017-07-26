@@ -157,7 +157,7 @@ You are done configuring the User Pool. You will now setup federation into the C
 
 ## Setup Chat App and User Registration
 
-* Steps 1 - 14 in this section should be done by one person in the team to enable the rest of the Lab capabilities. Steps 15 - 19 should be done by all team members to register with the chat application. After this section each of the Labs can be done concurrently.
+* Steps 5 - 14 in this section should be done by one person in the team to enable the rest of the Lab capabilities. Steps 1 - 4 and 15 - 19 should be done by all team members to register with the chat application. After this section each of the Labs can be done concurrently.
 
 1\. Verify you are in the correct region as specified on the team information provided by the facilitator.
 
@@ -175,7 +175,7 @@ You are done configuring the User Pool. You will now setup federation into the C
 
 * MyChatRoomURL - Click the link for "MyChatRoomURL". This should open your chat application in a new tab. Leave this tab open as you'll come back to it later.
 
-5\. Navigate to the Cognito service console.
+5\. Navigate to the Cognito service console. Note: Only one person on the team should perform steps 5 - 14.
 
 ![Navigate to the Cognito service](/Images/Cognito-Step1.png)
 
@@ -487,7 +487,7 @@ In this lab you'll launch an Elasticsearch Service cluster and setup DynamoDB St
 
 3\. On the **Configure Cluster** page, leave the default cluster settings and click **Next**.
 
-4\. For the access policy, select the **Allow or deny access to one or more AWS accounts or IAM users** option in the dropdown and fill in your account ID. Your AWS Account ID is actually provided to you in the examples section so just copy and paste it into the text box. Make sure **Allow** is selected for the "Effect" dropdown option. Click **OK**.
+4\. For the access policy, select the **Allow open access to the domain** option in the dropdown. Make note of the warning **This policy is not recommended because it allows anyone to delete, modify, or access indexes and documents in your domain. It is intended only as a convenience for testing. Don't load sensitive data to a domain that has these settings.**. For this lab we will selct this, but would not perform this step in production. Select "I accept the risk". Select the "OK" button.
 
 5\. Select **Next** to go to the domain review page.
 
@@ -632,7 +632,7 @@ You've configured Slack to forward messages to your zombie survivor chat app. Bu
 
 * * *
 
-## Lab 5 - Motion Sensor Integration with Intel Edison and Grove
+## Lab 5 - Motion Sensor Integration with Raspberry Pi and PIR Sensor
 
 In this section, you'll help protect suvivors from zombies. Zombie motion sensor devices allow communities to determine if zombies (or intruders) are nearby. You'll setup a Lambda function to consume motion sensor events from an IoT device and push the messages into your chat application.
 
@@ -744,7 +744,7 @@ Using the things learned in this workshop, can you develop a Lambda function tha
 
 1\. Open up the Lambda console and click **Create a Lambda function**.
 
-2\. On the blueprints screen, click **Skip** as we won't use one.
+2\. On the blueprints screen, select Blank Function.
 
 3\. On the next page (**Configure Triggers**), click the empty field next to the AWS Lambda logo and select SNS as an event source.
 
@@ -754,7 +754,7 @@ Using the things learned in this workshop, can you develop a Lambda function tha
 
 * The SNS Topic ARN provided by AWS (if in a workshop) is not in your AWS account and will not display in your dropdown of choices. It is an ARN provided by AWS in a separate account and needs to be typed in.
 
-4\. On the "Configure Function" screen, name your function "[Your CloudFormation Stack Name]-sensor". Now open the **exampleSNSFunction.js** file from the workshop GitHub repository. It is located [here](/zombieSensor/lambda/exampleSNSFunction.js). Copy the entire contents of this JS file into the empty Lambda code editor.
+4\. On the "Configure Function" screen, name your function "[TeamName]-sensor". Now open the **exampleSNSFunction.js** file from the workshop GitHub repository. It is located [here](/zombieSensor/lambda/exampleSNSFunction.js). Copy the entire contents of this JS file into the empty Lambda code editor.
 
 When you've copied the code into the Lambda browser editor, locate the variable **API**. Replace the variable **API.endpoint** with your /zombie/message/post endpoint. It should look like **https://xxxxxxxx.execute-api.us-west-2.amazonaws.com**. This is the "Invoke URL" which you can grab from the Stages page in the API Gateway console. Remember, don't insert anything after the ".com" portion, the function fills in the rest of the resource path for you. You also should insert the region for your API in the **API.region** variable.
 
