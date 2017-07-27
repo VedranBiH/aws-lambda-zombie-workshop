@@ -766,6 +766,8 @@ When you've copied the code into the Lambda browser editor, locate the variable 
 
 8\. That's it! When your function is created, head on over to your survivor chat application. If your session has expired you may need to login again.
 
+* The Zombie Raspberry Pi sensors are located in the atrium common area
+
 * Almost immediately you should begin seeing zombie sensor messages showing up in the chat application which means your messages are successfully sending from the Raspberry Pi device to the Zombie Sensor SNS Topic. Any survivors with Lambda functions subscribed to this topic will get notifications in their team's survivor chat service.  
 
 * This Lambda Function takes the zombie sensor message from SNS, parses it, and makes an AWS SigV4 signed HTTPS POST request to your API Gateway message endpoint. That endpoint inserts the record into DynamoDB as a message making it available to the application on subsequent poll requests.
